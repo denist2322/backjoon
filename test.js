@@ -1,10 +1,18 @@
-let input = require("fs").readFileSync("ex.txt").toString().split(" ");
+// const a = () => {
+//   for(let i=0; i<5; i++){
+//     if(i==2){
+//       return 2;
+//     }
+//     console.log(i)
+//   }
+// }
 
-const fibonacci = (n) => {
-  if (n === 0) return 0;
-  if (n === 1) return 1;
+// a();
 
-  return fibonacci(n - 2) + fibonacci(n - 1);
-};
+let a = "Hello";
 
-console.log(fibonacci(parseInt(input[0])));
+if(a.charAt(0) > a.charAt(1))
+  console.log(a.charAt(0));
+else if(a.charAt(0) < a.charAt(1))
+  console.log(a.charAt(1));
+

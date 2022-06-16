@@ -1,26 +1,53 @@
-n = int(input())
+import sys
+input = sys.stdin.readline
 
+N = int(input())
+num = sorted([int(input())for _ in range(N)])
 
-def draw_star(n):
-    # n이 1일때 = n이 더이상 3으로 나눠질 수 없을 때
-    if n == 1:
-        return ["*"]
-    # n이 1이 될때 까지 실행
-    stars = draw_star(n//3)
-    print("stars :", n, stars)
-    result = []
-    # 3n + 1번째 줄
-    for first in stars:
-        result.append(first*3)
-    # 3n + 2번째 줄
-    for second in stars:
-        result.append(second + " "*(n//3) + second)
-    # 3n + 3번째 줄
-    for third in stars:
-        result.append(third*3)
-    print("result:", n, result)
-    return result
+# 산술평균
+avg = sum(num)/N
+if -1 < avg < 0:
+    print(0)
+else:
+    print(round(avg))
+# 중앙값
+midValue = num[N//2]
+if -1 < midValue < 0:
+    print(0)
+else:
+    print(midValue)
 
+# 최빈값
+max = 0
+arr = [-1]*8001
+cnt = 0
+arr_repo = []
+find_max = 0
 
-draw_star(n)
-# print("\n".join(draw_star(n)))
+if(len(num) == 1):
+    print(num[0])
+else:
+    for i in num:
+        arr[i+4000] += 1
+
+    for i in range(8001):
+        if(arr[i] > find_max):
+            arr_repo.clear()
+            cnt = 0
+            find_max = arr[i]
+            max = i-4000
+            arr_repo.append(max)
+            continue
+
+        if(arr[i] == find_max):
+            cnt += 1
+            arr_repo.append(i-4000)
+            continue
+
+    if(cnt >= 1):
+        print(sorted(arr_repo)[1])  # 최빈값 여러개면 두번째로 작은 수
+    else:
+        print(max)
+
+# 범위
+print(num[len(num)-1]-num[0])
