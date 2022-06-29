@@ -1,18 +1,15 @@
-// const a = () => {
-//   for(let i=0; i<5; i++){
-//     if(i==2){
-//       return 2;
-//     }
-//     console.log(i)
-//   }
+// let dic = {1:0,2:1}
+
+// console.log(dic[3])
+
+// let a = "a1"
+
+// try{
+//   a = parseInt(a)
+//   console.log(a);
 // }
-
-// a();
-
-let a = "Hello";
-
-if(a.charAt(0) > a.charAt(1))
-  console.log(a.charAt(0));
-else if(a.charAt(0) < a.charAt(1))
-  console.log(a.charAt(1));
-
+// catch(error){
+//   console.log("에러 발생");
+// }
+let a = 1
+console.log(a.toString())

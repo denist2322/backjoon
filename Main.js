@@ -1,37 +1,26 @@
-let input = require('fs').readFileSync("ex.txt").toString().split("\n");
+let input = require('fs').readFileSync("ex.txt").toString().trim().split("\n");
 
-let N = parseInt(input[0])
-
+let NM = input[0].split(" ").map(Number)
 input.shift();
 
-input = new Set(input);
-input = Array.from(input);
+let whoIs = new Object();
+names = [];
+result = [];
+cnt = 0
 
-let result = ""
+for(let i = 0; i < NM[0]; i++){
+  whoIs[input[i].trim()] = 1;
+}
 
-input.sort((a, b) => {
-  let aLength = a.trim().length;
-  let bLength = b.trim().length;
+for(let j =NM[0]; j < NM[0]+NM[1]; j++){
+  names.push(input[j].toString().trim());
+}
 
-  if(aLength != bLength){
-      if(aLength > bLength){
-        return 1;
-      }
-      else if(aLength < bLength){
-        return -1;
-      }
+for(let val of names){
+  if(whoIs[val] > 0){
+    cnt++;
+    result.push(val);
   }
-
-  for(let i=0; i<aLength; i++){
-    if(a.charAt(i) > b.charAt(i)){
-      return 1;
-    }
-    else if(a.charAt(i) < b.charAt(i)){
-      return -1;
-    }
-  }    
-}).forEach(input => {
-  result += input.replace("\r","");
-});
-
-console.log(result.trim()+result.length);
+}
+console.log(cnt)
+console.log(result.sort((a,b)=>a - b).join("\n"));

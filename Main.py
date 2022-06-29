@@ -1,53 +1,31 @@
-import sys
-input = sys.stdin.readline
-
 N = int(input())
-num = sorted([int(input())for _ in range(N)])
-
-# 산술평균
-avg = sum(num)/N
-if -1 < avg < 0:
-    print(0)
-else:
-    print(round(avg))
-# 중앙값
-midValue = num[N//2]
-if -1 < midValue < 0:
-    print(0)
-else:
-    print(midValue)
-
-# 최빈값
-max = 0
-arr = [-1]*8001
+visited = [False] * N
+QueenLocation = [0] * N
 cnt = 0
-arr_repo = []
-find_max = 0
 
-if(len(num) == 1):
-    print(num[0])
-else:
-    for i in num:
-        arr[i+4000] += 1
 
-    for i in range(8001):
-        if(arr[i] > find_max):
-            arr_repo.clear()
-            cnt = 0
-            find_max = arr[i]
-            max = i-4000
-            arr_repo.append(max)
-            continue
+def DFS(depth):
+    global cnt
+    if depth == N:
+        cnt += 1
+        return
 
-        if(arr[i] == find_max):
-            cnt += 1
-            arr_repo.append(i-4000)
-            continue
+    for i in range(N):
+        if not visited[i]:  
+            QueenLocation[depth] = i  
 
-    if(cnt >= 1):
-        print(sorted(arr_repo)[1])  # 최빈값 여러개면 두번째로 작은 수
-    else:
-        print(max)
+            isQLocated = False
+            for j in range(depth):
+                   #상하좌우 탐색
+                if abs(QueenLocation[depth] - QueenLocation[j]) == abs(depth-j):                   
+                    isQLocated = True
+                    break
 
-# 범위
-print(num[len(num)-1]-num[0])
+            if not isQLocated:
+                visited[i] = True
+                DFS(depth+1)
+                visited[i] = False
+
+
+DFS(0)
+print(cnt)
